@@ -1,0 +1,8 @@
+::ng-deep {
+  .splash-screen {
+    z-index: var(--z-index-1103) !important;
+  }
+  .p-dialog-mask:has(.global-confirm-dialog) {
+    z-index: var(--z-index-1102) !important;
+  }
+}

@@ -1,0 +1,33 @@
+<app-table-wrapper
+  [headerTitle]="indexMeta.indexTitle"
+  [titleIcon]="indexMeta.indexIcon"
+  [headerBtnLabel]="indexMeta.createBtnLabel"
+  [columns]="indexMeta.columns"
+  [dataSource]="records()"
+  [loading]="isLoading()"
+  [totalRecords]="totalRecords()"
+  [recordsFiltered]="recordsFiltered()"
+  paginatorPosition="both"
+  [stateKey]="indexMeta.indexTableKey"
+  [displayHeaderButton]="indexMeta.displayHeaderButton"
+  [indexRole]="roles().index"
+  [withActionsColumn]="indexMeta.withAction"
+  [updateBtnRole]="roles().update"
+  [createBtnRole]="roles().create"
+  [deleteBtnRole]="roles().delete"
+  [globalFilterValue]="globalFilterValue"
+  [reorderableColumns]="indexMeta.reorderableColumns ?? false"
+  [reorderableRows]="indexMeta.reorderableRows ?? false"
+  (createBtnClicked)="openCreateRecordDialog()"
+  (updateBtnClicked)="openUpdateRecordDialog($event)"
+  (deleteBtnClicked)="deleteRecord($event)"
+  (onLoadData)="loadRecords($event)"
+>
+  <ng-template #day let-appointment>
+    {{ appointment.day | timeZone : "MM/DD/YYYY" }}
+  </ng-template>
+
+  <ng-template #consultation let-appointment>
+    {{ appointment.day_consultation | timeZone : "MM/DD/YYYY" }}
+  </ng-template>
+</app-table-wrapper>

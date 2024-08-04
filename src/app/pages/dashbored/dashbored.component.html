@@ -1,0 +1,16 @@
+<div class="grid mb-5">
+  @if(cardStatistcs().length){ @for(item of cardStatistcs(); track $index){
+  <div class="col-12 md:col-4 lg:col-3">
+    <app-card-content
+      [title]="item.name"
+      [count]="item.count"
+      [iconClass]="item.icon"
+      [typeTime]="item.type_time"
+    ></app-card-content>
+  </div>
+  } }@else { @for (i of [] | range:9; track $index){
+  <div class="col-12 md:col-4 lg:col-3">
+    <p-skeleton width="100%" height="4rem" />
+  </div>
+  } }
+</div>

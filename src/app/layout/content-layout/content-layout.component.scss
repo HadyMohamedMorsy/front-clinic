@@ -1,0 +1,9 @@
+.main-content {
+  padding-top: 20px;
+  padding-inline: 30px;
+  transition: 0.3s margin-inline-start linear;
+
+  @media (width >=992px) {
+    margin-inline-start: var(--sidebar-width);
+  }
+}

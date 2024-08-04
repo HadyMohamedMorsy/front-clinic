@@ -1,0 +1,48 @@
+<app-table-wrapper
+  [headerTitle]="indexMeta.indexTitle"
+  [titleIcon]="indexMeta.indexIcon"
+  [headerBtnLabel]="indexMeta.createBtnLabel"
+  [columns]="indexMeta.columns"
+  [dataSource]="records()"
+  [loading]="isLoading()"
+  [totalRecords]="totalRecords()"
+  [recordsFiltered]="recordsFiltered()"
+  paginatorPosition="both"
+  [indexRole]="roles().index"
+  [updateBtnRole]="roles().update"
+  [createBtnRole]="roles().create"
+  [deleteBtnRole]="roles().delete"
+  [stateKey]="indexMeta.indexTableKey"
+  [globalFilterValue]="globalFilterValue"
+  [showStriped]="true"
+  [withAdditionalContent]="true"
+  (createBtnClicked)="openCreateRecordDialog()"
+  (updateBtnClicked)="openUpdateRecordDialog($event)"
+  (deleteBtnClicked)="deleteRecord($event)"
+  (onLoadData)="loadRecords($event)"
+>
+  <ng-template #appointment let-patient>
+    <a class="text-blue-400" [routerLink]="'/appointments/' + patient._id">
+      {{ patient.name }}</a
+    >
+  </ng-template>
+
+  <ng-template #extendDefaultActionsTemplate let-patient>
+    <button
+      pButton
+      icon="fa-solid fa-calendar-check text-sm"
+      class="p-button-rounded p-button-text p-button-sm"
+      pTooltip="create appointment"
+      tooltipPosition="top"
+      (click)="openApoointmentDialog(patient._id)"
+    ></button>
+    <a
+      pButton
+      icon="fa-solid fa-file-invoice text-sm"
+      class="p-button-rounded p-button-text p-button-sm text-orange-400"
+      pTooltip="show Invoices"
+      tooltipPosition="top"
+      [routerLink]="'/invoices/' + patient._id"
+    ></a>
+  </ng-template>
+</app-table-wrapper>

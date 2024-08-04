@@ -1,0 +1,65 @@
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "baseUrl": "./",
+    "outDir": "./dist/out-tsc",
+    "paths": {
+      "@abort403": [
+        "src/app/pages/errors/403/403.component.html"
+      ],
+      "@abort404": [
+        "src/app/pages/errors/404/404.component.html"
+      ],
+      "@abort422": [
+        "src/app/pages/errors/422/422.component.html"
+      ],
+      "@abort503": [
+        "src/app/pages/errors/503/503.component"
+      ],
+      "@core/*": [
+        "src/app/core/*"
+      ],
+      "@env": [
+        "src/environments/environment"
+      ],
+      "@gService/*": [
+        "src/app/shared/services/global-services/*"
+      ],
+      "@layout/*": [
+        "src/app/layout/*"
+      ],
+      "@pages/*": [
+        "src/app/pages/*"
+      ],
+      "@shared": [
+        "src/app/shared"
+      ]
+    },
+    "forceConsistentCasingInFileNames": true,
+    "strict": true,
+    "noImplicitOverride": true,
+    "noPropertyAccessFromIndexSignature": false,
+    "noImplicitReturns": false,
+    "noFallthroughCasesInSwitch": true,
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "sourceMap": true,
+    "declaration": false,
+    "experimentalDecorators": true,
+    "moduleResolution": "node",
+    "importHelpers": true,
+    "target": "ES2022",
+    "module": "ES2022",
+    "useDefineForClassFields": false,
+    "lib": [
+      "ES2022",
+      "dom"
+    ]
+  },
+  "angularCompilerOptions": {
+    "enableI18nLegacyMessageIdFormat": false,
+    "strictInjectionParameters": true,
+    "strictInputAccessModifiers": true,
+    "strictTemplates": true
+  }
+}

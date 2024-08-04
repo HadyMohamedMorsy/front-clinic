@@ -1,0 +1,12 @@
+h1 {
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -40%);
+  color: var(--gray-400);
+  text-transform: capitalize;
+  font-weight: 600;
+  font-size: clamp(12vw, 7vw, 2rem);
+  line-height: 1;
+  margin: 0;
+}

@@ -1,0 +1,91 @@
+<div
+  class="sidebar layout-sidebar flex flex-column fixed left-0 top-0 h-full shadow-2"
+  (mouseenter)="showSidebar()"
+  (mouseleave)="closeSidebar()"
+>
+  <div class="sidebar-header border-200 border-bottom-1 px-2">
+    <div class="flex justify-content-between w-full align-items-center">
+      <a routerLink="/home">
+        <img
+          src="assets/media/logo/creatvo.png"
+          alt=""
+          class="max-w-3rem max-h-3rem contain-contain"
+        />
+      </a>
+    </div>
+  </div>
+  <div class="sidebar-content">
+    <ul
+      class="list-none list flex flex-column p-3 align-items-center gap-3 h-full"
+    >
+      @for(item of menuItems; let i = $index; track i){ @if(!item.children){
+      <li [ngClass]="{ 'mt-1': !i }">
+        @if(!item.command){
+        <a
+          [routerLink]="item.link"
+          class="flex items-center gap-3"
+          routerLinkActive="text-orange-500 p-1"
+        >
+          @if(showLabel()){
+          <i [class]="item.icon + ' ' + 'text-xl'"></i>
+          <span>{{ item.title }}</span>
+          }@else {
+          <i [class]="item.icon + ' ' + 'text-xl'"></i>
+          }
+        </a>
+        }@else{
+        <a
+          (click)="item.command()"
+          class="flex items-center gap-3 p-button-link cursor-pointer"
+        >
+          @if(showLabel()){
+          <i [class]="item.icon + ' ' + 'text-xl'"></i>
+          <span>{{ item.title }}</span>
+          }@else {
+          <i [class]="item.icon + ' ' + 'text-xl'"></i>
+          }
+        </a>
+        }
+      </li>
+      }@else {
+      <li>
+        @if(!showLabel()){
+        <i [class]="item.icon + ' ' + 'text-xl'"></i>
+        }@else{
+        <div
+          pRipple
+          pStyleClass="@next"
+          enterClass="hidden"
+          enterActiveClass="slidedown"
+          leaveToClass="hidden"
+          leaveActiveClass="slideup"
+          class="flex align-items-center justify-content-between cursor-pointer p-ripple"
+        >
+          <div class="flex align-items-center gap-2">
+            <i [class]="item.icon + ' ' + 'text-xl'"></i>
+            <span>{{ item.title }}</span>
+          </div>
+          <i class="pi pi-chevron-down"></i>
+        </div>
+
+        <ul class="list-none p-0 m-0 overflow-hidden hidden">
+          @for(childItem of item.children; let i = $index; track i){
+          <li class="mt-2">
+            <a
+              [routerLink]="childItem.link"
+              routerLinkActive="bg-orange-500 text-white"
+              pRipple
+              class="flex align-items-center cursor-pointer p-2 border-round hover:bg-orange-500 hover:text-white transition-duration-150 transition-colors p-ripple text-sm"
+            >
+              <i [class]="childItem.icon + ' ' + 'mr-2'"></i>
+              <span class="font-medium">{{ childItem.title }}</span>
+            </a>
+          </li>
+          }
+        </ul>
+        }
+      </li>
+      } }
+    </ul>
+  </div>
+</div>

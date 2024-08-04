@@ -1,0 +1,27 @@
+<div class="mb-2">
+  <app-section-title
+    title="{{ 'Login' | translate }}"
+    titleClass="text-center font-light"
+    typeHeader="h1"
+    descriptionClass="w-20rem"
+  >
+  </app-section-title>
+</div>
+
+<app-form
+  [form]="loginForm"
+  [model]="model"
+  [fields]="fields"
+  [submitBtnLoading]="loading()"
+  buttonLabel="{{ 'Login' | translate }}"
+  footerFormClass="px-0"
+  submitButtonClass="uppercase text-base w-full  bg-primary-color border-none shadow-none"
+  (onSubmit)="login()"
+>
+</app-form>
+
+<div class="flex justify-content-end px-3">
+  <a class="text-blue-500 capitalize" routerLink="/auth/forget-password">
+    forget password ?
+  </a>
+</div>

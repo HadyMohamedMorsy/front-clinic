@@ -1,0 +1,71 @@
+::ng-deep {
+  // sidebar style
+  .sidebar.layout-sidebar {
+    z-index: var(--z-index-1100) !important;
+    left: auto;
+    right: auto;
+    inset-inline-start: 0;
+    width: var(--sidebar-width);
+    background-color: var(--surface-overlay);
+    transition: width 0.3s linear;
+    will-change: width;
+
+    &[aria-modal="false"] + .p-component-overlay {
+      display: none;
+    }
+
+    @media (width >=992px) {
+      width: var(--sidebar-width);
+
+      .sidebar-header {
+        justify-content: center;
+      }
+    }
+
+    .sidebar-header {
+      padding: 0.5rem 5px;
+      border-bottom: 1px solid #eee;
+
+      .p-togglebutton.p-button.p-highlight {
+        background-color: transparent;
+        border-color: transparent;
+      }
+    }
+
+    &:hover {
+      .sidebar-content {
+        .list {
+          li {
+            width: 100%;
+            text-align: start;
+            a {
+              justify-content: flex-start;
+              span {
+                opacity: 1;
+              }
+            }
+          }
+        }
+      }
+    }
+
+    .sidebar-content {
+      overflow-y: unset;
+      transition: opacity 0.3s 0.3s ease;
+      .list {
+        li {
+          width: 100%;
+          padding-block: 5px;
+          padding-inline: 5px;
+          text-align: center;
+          a {
+            justify-content: center;
+            span {
+              opacity: 0;
+            }
+          }
+        }
+      }
+    }
+  }
+}
