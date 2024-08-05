@@ -4,20 +4,33 @@ import {
   ChangeDetectionStrategy,
   Component,
   input,
+  signal,
   TemplateRef,
   viewChild,
 } from '@angular/core';
+import { toObservable, toSignal } from '@angular/core/rxjs-interop';
+import { CardContentComponent } from '@pages/dashbored/card-content/card-content.component';
 import {
   BaseIndexComponent,
+  RangePipe,
   TableWrapperComponent,
   TimeZonePipe,
 } from '@shared';
+import { SkeletonModule } from 'primeng/skeleton';
+import { filter, map, tap } from 'rxjs';
 import { Appointments } from './services/service-type';
 
 @Component({
   selector: 'app-appointment',
   standalone: true,
-  imports: [AsyncPipe, TableWrapperComponent, TimeZonePipe],
+  imports: [
+    AsyncPipe,
+    TableWrapperComponent,
+    TimeZonePipe,
+    RangePipe,
+    CardContentComponent,
+    SkeletonModule,
+  ],
   templateUrl: './appointment.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -28,6 +41,32 @@ export default class AppointmentComponent extends BaseIndexComponent<
   day = viewChild.required<TemplateRef<any>>('day');
   consultation = viewChild.required<TemplateRef<any>>('consultation');
   id = input<string>('');
+  cardStatistcs = signal<any[]>([]);
+
+  analytics$ = this.api.request('get', 'analytics/reservations').pipe(
+    map(({ data }) => data.data),
+    tap((data) => this.cardStatistcs.set(data))
+  );
+
+  actionIncrement$ = toObservable(this.actionCrement).pipe(
+    filter((e) => e > 0 || e < 0),
+    tap((num) => {
+      this.cardStatistcs.update((statitcs) => {
+        return statitcs.map((item) => ({
+          ...item,
+          count: item.count ? item.count + num : item.count,
+        }));
+      });
+    })
+  );
+
+  cardStatistcsReadOnly = toSignal(this.analytics$, {
+    initialValue: [],
+  });
+
+  actionIncrementReadOnly = toSignal(this.actionIncrement$, {
+    initialValue: 0,
+  });
 
   ngOnInit() {
     this.indexMeta = {

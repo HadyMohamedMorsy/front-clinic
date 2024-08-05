@@ -52,6 +52,7 @@ export abstract class BaseIndexComponent<
   public destroyRef = inject(DestroyRef); // Current "context" (this component)
   public dialogService = inject(DialogService);
   public dialogRef: DynamicDialogRef | undefined;
+  public actionCrement = signal<number>(0);
 
   // Common properties used by all specific components
   records = signal<R[]>([]);
@@ -149,6 +150,7 @@ export abstract class BaseIndexComponent<
         this.records.update((records) => [record, ...records]);
         this.totalRecords.update((totalRecords) => totalRecords + 1);
         this.recordsFiltered.update((recordsFiltered) => recordsFiltered + 1);
+        this.actionCrement.set(1);
       });
   }
 
@@ -180,6 +182,7 @@ export abstract class BaseIndexComponent<
         );
         this.totalRecords.update((totalRecords) => totalRecords - 1);
         this.recordsFiltered.update((recordsFiltered) => recordsFiltered - 1);
+        this.actionCrement.set(-1);
       });
   }
 }
